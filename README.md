@@ -1,66 +1,91 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ChipiChapa Store
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi Pendataan Barang berbasis web untuk PT ChipiChapa. Dibangun menggunakan Laravel 9 dengan Bootstrap 5.
 
-## About Laravel
+## Fitur
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Admin
+- Login admin terpisah
+- CRUD barang (tambah, lihat, edit, hapus) dengan upload foto
+- Kelola kategori dan stok barang
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### User
+- Register & login
+- Lihat katalog barang
+- Tambah barang ke keranjang belanja
+- Checkout & buat faktur pembelian
+- Cetak faktur (invoice)
+- Riwayat faktur
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Instalasi
 
-## Learning Laravel
+1. **Clone repository**
+   ```bash
+   git clone https://github.com/owengeoffrey/chipichapa-store.git
+   cd chipichapa-store
+   ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2. **Install dependencies**
+   ```bash
+   composer install
+   ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+3. **Konfigurasi environment**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+4. **Buat database SQLite**
+   ```bash
+   touch database/database.sqlite
+   ```
+   Pastikan di file `.env`:
+   ```
+   DB_CONNECTION=sqlite
+   ```
 
-## Laravel Sponsors
+5. **Jalankan migrasi & seeder**
+   ```bash
+   php artisan migrate --seed
+   ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+6. **Link storage untuk foto barang**
+   ```bash
+   php artisan storage:link
+   ```
 
-### Premium Partners
+7. **Jalankan server**
+   ```bash
+   php artisan serve
+   ```
+   Buka `http://localhost:8000` di browser.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+## Akun Demo
 
-## Contributing
+| Role  | Email              | Password   | URL Login        |
+|-------|--------------------|------------|------------------|
+| Admin | admin@gmail.com    | admin123   | `/admin/login`   |
+| User  | user@gmail.com     | user123    | `/login`         |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Cara Penggunaan
 
-## Code of Conduct
+### Sebagai Admin
+1. Buka `/admin/login` dan masuk dengan akun admin
+2. Kelola barang: tambah barang baru, edit harga/stok, upload foto, atau hapus barang
+3. Semua perubahan langsung terlihat di katalog user
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Sebagai User
+1. Register akun baru atau login dengan akun demo
+2. Buka **Katalog** untuk melihat daftar barang yang tersedia
+3. Klik **Tambah ke Keranjang** pada barang yang ingin dibeli
+4. Buka **Keranjang** untuk mengatur jumlah pesanan
+5. Klik **Checkout & Buat Faktur**, isi alamat pengiriman dan kode pos
+6. Faktur otomatis tersimpan dan bisa dicetak
 
-## Security Vulnerabilities
+## Tech Stack
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- **Framework**: Laravel 9
+- **PHP**: 8.x
+- **Database**: SQLite
+- **Frontend**: Bootstrap 5, Bootstrap Icons, Google Fonts (Inter)
